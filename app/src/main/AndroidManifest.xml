@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.acktos.playcoffe" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+    <application
+        android:name=".android.AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+
+        <activity
+            android:name=".presentation.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name="com.spotify.sdk.android.authentication.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".presentation.FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name=".presentation.SessionsActivity"
+            android:label="@string/title_activity_sessions" >
+
+
+        </activity>
+        <activity
+            android:name=".presentation.PlaylistActivity"
+            android:label="@string/title_activity_playlist"
+            android:parentActivityName=".presentation.SessionsActivity" >
+
+            <!--
+                <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.acktos.playcoffe.presentation.SessionsActivity" />
+            -->
+
+        </activity>
+        <activity
+            android:name=".presentation.SearchableActivity"
+            android:label="@string/title_activity_searchable"
+            android:parentActivityName=".presentation.PlaylistActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.acktos.playcoffe.presentation.PlaylistActivity" />
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+
+        </activity>
+        <activity
+            android:name=".presentation.NavigationActivity"
+            android:label="@string/app_name"
+            android:theme="@style/MyNoActionBarTheme" >
+        </activity>
+        <activity
+            android:name=".presentation.PruebaActivity"
+            android:label="@string/title_activity_prueba" >
+        </activity>
+    </application>
+
+</manifest>

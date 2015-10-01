@@ -1,0 +1,158 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.acktos.playcoffe.presentation.PlaylistActivity">
+
+    <RelativeLayout
+        android:id="@+id/message_content"
+        android:layout_width="match_parent"
+        android:background="@color/primary_light"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/txt_player_message_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            android:text="Full 80´s BAR"
+            android:layout_marginBottom="16dp"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:id="@+id/txt_player_message_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/primary_text"
+            android:text="En pocos minutos empezaremos la reproducción del play list"
+            android:layout_below="@+id/txt_player_message_title"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/player_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:paddingBottom="16dp"
+        android:visibility="invisible">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/thumb_album_player"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/erasure" />
+
+        <TextView
+            android:id="@+id/txt_track_name_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/icons"
+            android:text="Scream &amp; Shout"
+            android:layout_alignTop="@+id/thumb_album_player"
+            android:layout_toRightOf="@+id/thumb_album_player"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/txt_artist_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/primary_light"
+            android:text="Erasure"
+            android:layout_below="@+id/txt_track_name_player"
+            android:layout_toRightOf="@+id/thumb_album_player" />
+
+        <ProgressBar
+            android:id="@+id/player_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:indeterminate="false"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/thumb_album_player"
+            android:layout_toEndOf="@+id/thumb_album_player"
+            android:layout_below="@+id/txt_artist_player"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/player_progress_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="12sp"
+            android:text="00:00"
+
+            android:textColor="@color/primary_light"
+            android:layout_below="@+id/player_progress"
+            android:layout_alignLeft="@+id/player_progress"
+            android:layout_alignStart="@+id/player_progress"/>
+
+        <TextView
+            android:id="@+id/player_track_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="12sp"
+            android:text="05:32"
+
+            android:textColor="@color/primary_light"
+            android:layout_below="@+id/player_progress"
+            android:layout_alignRight="@+id/player_progress"
+            android:layout_alignEnd="@+id/player_progress" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/content_empty_play_list"
+        android:layout_below="@+id/message_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_headset_black_24dp"
+            android:layout_gravity="center_horizontal"
+            android:tint="@color/divider"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:textColor="@color/divider"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="El Playlist esta vacío"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@color/divider"
+            android:layout_gravity="center_horizontal"
+            android:text="Se el primero en agregar una canción."/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_playlist_tracks"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/player_content"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
+

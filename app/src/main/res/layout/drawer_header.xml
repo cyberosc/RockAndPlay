@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:background="@color/primary_dark"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/img_profile_navigation"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/erasure"
+        app:border_color="#FF000000"
+        android:layout_marginLeft="24dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp" />
+
+    <TextView
+        android:id="@+id/txt_name_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:gravity="left"
+        android:paddingBottom="4dp"
+        android:layout_above="@+id/txt_email_navigation"
+        android:layout_alignLeft="@+id/img_profile_navigation"
+        android:layout_alignStart="@+id/img_profile_navigation" />
+
+    <TextView
+        android:id="@+id/txt_email_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginBottom="16dp"
+        android:textSize="14sp"
+        android:textColor="@color/primary_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/txt_name_navigation"
+        android:layout_alignStart="@+id/txt_name_navigation" />
+
+</RelativeLayout>

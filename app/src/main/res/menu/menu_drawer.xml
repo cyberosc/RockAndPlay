@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_search"
+            android:checked="false"
+            android:icon="@drawable/ic_search_white_24dp"
+            android:title="Buscar" />
+
+        <item
+            android:id="@+id/menu_bars"
+            android:checked="false"
+            android:icon="@drawable/ic_local_bar_black_24dp"
+            android:title="@string/bars" />
+
+        <item
+            android:id="@+id/menu_credits"
+            android:checked="false"
+            android:icon="@drawable/ic_local_activity_black_24dp"
+            android:title="@string/credits" />
+        <!--
+                <item
+                    android:id="@+id/drafts"
+                    android:checked="false"
+                    android:icon="@drawable/ic_drafts_black"
+                    android:title="@string/draft_string" />
+
+
+                <item
+                    android:id="@+id/allmail"
+                    android:checked="false"
+                    android:icon="@drawable/ic_email_black"
+                    android:title="@string/all_mail_string" />
+                <item
+                    android:id="@+id/trash"
+                    android:checked="false"
+                    android:icon="@drawable/ic_delete_black"
+                    android:title="@string/trash_string" />
+                <item
+                    android:id="@+id/spam"
+                    android:checked="false"
+                    android:icon="@drawable/ic_error_black"
+                    android:title="@string/spam_string" />-->
+
+    </group>
+</menu>
