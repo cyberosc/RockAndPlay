@@ -158,8 +158,6 @@ public class SessionsFragment extends Fragment implements SessionsAdapter.OnRecy
                             sessionSnapshot.getKey().toString(),
                             sessionSnapshot.child(Session.KEY_BAR_ID).getValue().toString(),
                             sessionSnapshot.child(Session.KEY_SESSION_NAME).getValue().toString(),
-                            sessionSnapshot.child(Session.KEY_BAR_NAME).getValue().toString(),
-                            sessionSnapshot.child(Session.KEY_BAR_ADDRESS).getValue().toString(),
                             sessionSnapshot.child(Session.KEY_START_DATE).getValue().toString(),
                             sessionSnapshot.child(Session.KEY_END_DATE).getValue().toString()
                     );
@@ -167,7 +165,7 @@ public class SessionsFragment extends Fragment implements SessionsAdapter.OnRecy
                     //String title = (String) snapshot.child("title").getValue();
                     //Session session = sessionSnapshot.get
                     firebaseSessions.add(session);
-                    System.out.println(session.getBarName() + " - " + session.getSessionName());
+                    Log.i ( BaseController.TAG,"Session name: " + session.getSessionName());
                 }
 
                 if(firebaseSessions!=null){

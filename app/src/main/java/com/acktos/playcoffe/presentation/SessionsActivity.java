@@ -104,8 +104,6 @@ public class SessionsActivity extends AppCompatActivity implements SessionsAdapt
                             sessionSnapshot.getKey(),
                             sessionSnapshot.child(Session.KEY_BAR_ID).getValue().toString(),
                             sessionSnapshot.child(Session.KEY_SESSION_NAME).getValue().toString(),
-                            sessionSnapshot.child(Session.KEY_BAR_NAME).getValue().toString(),
-                            sessionSnapshot.child(Session.KEY_BAR_ADDRESS).getValue().toString(),
                             sessionSnapshot.child(Session.KEY_START_DATE).getValue().toString(),
                             sessionSnapshot.child(Session.KEY_END_DATE).getValue().toString());
 

@@ -194,7 +194,6 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
 
     }
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -217,11 +216,6 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
 
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
-
     private void setupFirebase() {
         Firebase.setAndroidContext(getActivity());
         mFirebaseRef = new Firebase(BaseController.FIREBASE_URL);//Create the Firebase ref
@@ -235,7 +229,8 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
         tracksRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i(BaseController.TAG, dataSnapshot.getValue().toString());
+
+                Log.i(BaseController.TAG, "player state changed:"+dataSnapshot.getValue().toString());
                 initProgress(dataSnapshot.getValue(Player.class));
             }
 
@@ -277,7 +272,8 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
 
             Log.i(BaseController.TAG, "elapsedTime:" + elapsedTime);
 
-            if (elapsedTime >= 0 && elapsedTime < duration) {
+            if(currentTime<(startTime+duration)){
+            //if (elapsedTime >= 0 && elapsedTime < duration) {
 
                 togglePlayerMessage(false,null,null);// hidden message and then displays the player
                 txtTrackName.setText(player.getTrackName());
@@ -405,5 +401,11 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
         }
     }
 
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        public void onFragmentInteraction(Uri uri);
+        public void showPlayListFragment();
+    }
 
 }

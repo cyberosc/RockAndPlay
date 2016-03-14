@@ -22,14 +22,17 @@ public class BaseController {
     public static final String FIREBASE_URL="https://coffe-play.firebaseio.com/";
     public static final String TABLE_USERS="users";
     public static final String TABLE_SESSIONS="sessions";
+    public static final String TABLE_CREDITS="credits";
     public static final String TABLE_TRACKS="tracks";
+    public static final String TABLE_CARDS="cards";
+    public static final String TABLE_BARS="bars";
     public static final String TABLE_PLAYER_STATE="playerState";
 
     // Api endpoints
 
     public enum API{
 
-        GET_SPOTIFY_USER("https://api.spotify.com/v1/me"),
+        GET_SPOTIFY_USER("http://www.acktos.com.co/prueba_oscar.php"),
         SEARCH_TRACK_SPOTIFY("https://api.spotify.com/v1/search");
 
         private final String url;

@@ -1,0 +1,320 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.acktos.playcoffe.presentation.SessionDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--<RelativeLayout
+            android:id="@+id/detail_cont_order_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp">
+
+            <ImageView
+                android:id="@+id/detail_ic_order_id"
+                android:layout_width="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:tint="@color/primary_text"
+                android:src="@drawable/ic_headset_black_48dp"
+                android:layout_margin="16dp"
+                android:layout_height="32dp" />
+
+            <TextView
+                android:id="@+id/detail_lbl_order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:layout_toRightOf="@+id/detail_ic_order_id"
+                android:layout_toEndOf="@+id/detail_ic_order_id"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="4dp"
+                android:textStyle="bold"
+                android:text="Referencia del pedido"/>
+
+            <TextView
+                android:id="@+id/detail_txt_order_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:layout_toRightOf="@+id/detail_ic_order_id"
+                android:layout_toEndOf="@+id/detail_ic_order_id"
+                android:layout_below="@+id/detail_lbl_order_id"
+                android:text="R1515"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/divider"
+                android:layout_below="@+id/detail_txt_order_id"
+                android:layout_toRightOf="@+id/detail_ic_order_id"
+                android:layout_toEndOf="@+id/detail_ic_order_id"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/detail_cont_delivery_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp">
+
+            <ImageView
+                android:id="@+id/detail_ic_delivery_date"
+                android:layout_width="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:tint="@color/colorPrimaryText"
+                android:src="@drawable/ic_date"
+                android:layout_margin="16dp"
+                android:layout_height="32dp" />
+
+            <TextView
+                android:id="@+id/detail_lbl_delivery_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_toRightOf="@+id/detail_ic_delivery_date"
+                android:layout_toEndOf="@+id/detail_ic_delivery_date"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="4dp"
+                android:textStyle="bold"
+                android:text="Fecha de Entrega"/>
+
+            <TextView
+                android:id="@+id/detail_txt_delivery_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_toRightOf="@+id/detail_ic_delivery_date"
+                android:layout_toEndOf="@+id/detail_ic_delivery_date"
+                android:layout_below="@+id/detail_lbl_delivery_date"
+                android:text="30 octubre 2015"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorDivider"
+                android:layout_below="@+id/detail_txt_delivery_date"
+                android:layout_toRightOf="@+id/detail_ic_delivery_date"
+                android:layout_toEndOf="@+id/detail_ic_delivery_date"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/detail_cont_delivery_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp">
+
+            <ImageView
+                android:id="@+id/detail_ic_delivery_address"
+                android:layout_width="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:tint="@color/colorPrimaryText"
+                android:src="@drawable/ic_place_24dp"
+                android:layout_margin="16dp"
+                android:layout_height="32dp" />
+
+            <TextView
+                android:id="@+id/detail_lbl_delivery_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_toRightOf="@+id/detail_ic_delivery_address"
+                android:layout_toEndOf="@+id/detail_ic_delivery_address"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="4dp"
+                android:textStyle="bold"
+                android:text="Dirección de entrega"/>
+
+            <TextView
+                android:id="@+id/detail_txt_delivery_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_toRightOf="@+id/detail_ic_delivery_address"
+                android:layout_toEndOf="@+id/detail_ic_delivery_address"
+                android:layout_below="@+id/detail_lbl_delivery_address"
+                android:text="Cra 79 # 10 d 95"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorDivider"
+                android:layout_below="@+id/detail_txt_delivery_address"
+                android:layout_toRightOf="@+id/detail_ic_delivery_address"
+                android:layout_toEndOf="@+id/detail_ic_delivery_address"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/detail_cont_customer_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp">
+
+            <ImageView
+                android:id="@+id/detail_ic_customer_phone"
+                android:layout_width="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:tint="@color/colorPrimaryText"
+                android:src="@drawable/ic_call_24dp"
+                android:layout_margin="16dp"
+                android:layout_height="32dp" />
+
+            <TextView
+                android:id="@+id/detail_lbl_customer_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_toRightOf="@+id/detail_ic_customer_phone"
+                android:layout_toEndOf="@+id/detail_ic_customer_phone"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="4dp"
+                android:textStyle="bold"
+                android:text="Teléfono del cliente"/>
+
+            <TextView
+                android:id="@+id/detail_txt_customer_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_toRightOf="@+id/detail_ic_customer_phone"
+                android:layout_toEndOf="@+id/detail_ic_customer_phone"
+                android:layout_below="@+id/detail_lbl_customer_phone"
+                android:text="3102346547"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorDivider"
+                android:layout_below="@+id/detail_txt_customer_phone"
+                android:layout_toRightOf="@+id/detail_ic_customer_phone"
+                android:layout_toEndOf="@+id/detail_ic_customer_phone"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/detail_cont_delivery_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp">
+
+            <ImageView
+                android:id="@+id/detail_ic_delivery_state"
+                android:layout_width="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:tint="@color/colorPrimaryText"
+                android:src="@drawable/ic_delivery_state_24dp"
+                android:layout_margin="16dp"
+                android:layout_height="32dp" />
+
+            <TextView
+                android:id="@+id/detail_lbl_delivery_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_toRightOf="@+id/detail_ic_delivery_state"
+                android:layout_toEndOf="@+id/detail_ic_delivery_state"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="4dp"
+                android:textStyle="bold"
+                android:text="Estado de entrega"/>
+
+            <TextView
+                android:id="@+id/detail_txt_delivery_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_toRightOf="@+id/detail_ic_delivery_state"
+                android:layout_toEndOf="@+id/detail_ic_delivery_state"
+                android:layout_below="@+id/detail_lbl_delivery_state"
+                android:text="Entrega exitosa"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorDivider"
+                android:layout_below="@+id/detail_txt_delivery_state"
+                android:layout_toRightOf="@+id/detail_ic_delivery_state"
+                android:layout_toEndOf="@+id/detail_ic_delivery_state"/>
+
+        </RelativeLayout>-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/content_empty_session"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingRight="32dp"
+        android:paddingLeft="32dp"
+        android:gravity="center_vertical"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/beer"
+            android:layout_gravity="center_horizontal"
+            android:tint="@color/divider"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:textColor="@color/secondary_text"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/empty_joined_session"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@color/secondary_text"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/msg_invite_to_join_session"/>
+
+        <Button
+            android:id="@+id/btn_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/primary"
+            android:textAllCaps="true"
+            android:text="@string/scan"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+</FrameLayout>

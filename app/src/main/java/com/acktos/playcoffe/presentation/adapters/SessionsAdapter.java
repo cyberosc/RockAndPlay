@@ -70,7 +70,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
         viewHolder.name.setText(sessions.get(i).getSessionName());
-        viewHolder.place.setText(sessions.get(i).getBarName());
+        viewHolder.place.setText(sessions.get(i).getSessionName());
         viewHolder.schedule.setText(sessions.get(i).getFinalDate());
     }
 

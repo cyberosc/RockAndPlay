@@ -7,5 +7,5 @@
         android:title="Add track"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:icon="@drawable/ic_queue_music_white_24dp"/>
+        android:icon="@drawable/ic_queue_24dp"/>
 </menu>

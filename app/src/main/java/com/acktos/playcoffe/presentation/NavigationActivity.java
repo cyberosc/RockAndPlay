@@ -1,8 +1,12 @@
 package com.acktos.playcoffe.presentation;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -38,20 +42,28 @@ public class NavigationActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private TextView txtEmailNavigation;
     private TextView txtNameNavigation;
-    CircleImageView imgProfileNavigation;
+    private CircleImageView imgProfileNavigation;
+    private AppBarLayout appBarLayout;
+
 
     //Components
     UsersController usersController;
     SessionsController sessionsController;
 
+    //Android Utilities
+    FragmentTransaction fragmentTransaction;
+
     //Attributes
     User user;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,13 +74,30 @@ public class NavigationActivity extends AppCompatActivity implements
         txtNameNavigation=(TextView) findViewById(R.id.txt_name_navigation);
         imgProfileNavigation=(CircleImageView) findViewById(R.id.img_profile_navigation);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        appBarLayout= (AppBarLayout) findViewById(R.id.app_bar_layout);
 
 
         //Initialize components
         usersController=new UsersController(this);
         sessionsController=new SessionsController(this);
+        //setupNavigationView();
+
+        //sessionsController.deleteJoinedSession();
 
 
+        //Get current user from local storage
+        user=usersController.getUser();
+
+        //Set user data into navigationView
+        //setNavigationUserInfo();
+
+        //add fragment to frame
+        addRightSessionFragment();
+        appBarLayout.setExpanded(false);
+
+    }
+
+    private void setupNavigationView(){
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -132,16 +161,6 @@ public class NavigationActivity extends AppCompatActivity implements
 
         //calling sync state is necessary or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
-
-        //Get current user from local storage
-        user=usersController.getUser();
-
-        //Set user data into navigationView
-        setNavigationUserInfo();
-
-        //add fragment to frame
-        addRightSessionFragment();
-
     }
 
     private void setNavigationUserInfo(){
@@ -170,20 +189,49 @@ public class NavigationActivity extends AppCompatActivity implements
      */
     private void addRightSessionFragment(){
 
-        FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+
 
         if(sessionsController.isUserJoinedToSession()){
 
             PlayListFragment playListFragment=PlayListFragment.newInstance();
-            fragmentTransaction.replace(R.id.fragment,playListFragment);
-            fragmentTransaction.commit();
+            replaceFragment(R.id.fragment,playListFragment,false);
+
+            //fragmentTransaction.replace(R.id.fragment,playListFragment);
+            //fragmentTransaction.commit();
 
         }else{
 
-            SessionsFragment sessionFragment=SessionsFragment.newInstance();
+            // test session detail fragment
+            SessionDetailFragment sessionDetailFragment=SessionDetailFragment.newInstance("hola","hola");
+            //fragmentTransaction.replace(R.id.fragment,sessionDetailFragment);
+            //fragmentTransaction.commit();
+            replaceFragment(R.id.fragment,sessionDetailFragment,false);
+
+            /*SessionsFragment sessionFragment=SessionsFragment.newInstance();
             fragmentTransaction.replace(R.id.fragment,sessionFragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
         }
+
+
+    }
+
+    /**
+     * Makes a transaction to replace the main fragment with other.
+     * @param fragmentLayout fragment resource in layout.
+     * @param fragmentToReplace fragment to set in main fragment.
+     * @param addToBackStack if true, add this transaction to backStack.
+     */
+    private void replaceFragment(int fragmentLayout,android.app.Fragment fragmentToReplace,Boolean addToBackStack){
+
+        fragmentTransaction=getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(fragmentLayout,fragmentToReplace);
+
+        if(addToBackStack){
+            fragmentTransaction.addToBackStack(null);
+        }
+
+        fragmentTransaction.commit();
+
     }
 
     @Override
@@ -220,5 +268,16 @@ public class NavigationActivity extends AppCompatActivity implements
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+
     }
+
+    @Override
+    public void showPlayListFragment(){
+
+        PlayListFragment playListFragment=PlayListFragment.newInstance();
+        replaceFragment(R.id.fragment,playListFragment,false);
+
+    }
+
+
 }

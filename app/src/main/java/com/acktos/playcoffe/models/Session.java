@@ -11,29 +11,25 @@ public class Session extends BaseModel{
     public String id;
     public String barId;
     public String sessionName;
-    public String barName;
-    public String barAddress;
     public String startDate;
     public String endDate;
 
+
     public static final String KEY_BAR_ID="barId";
     public static final String KEY_SESSION_NAME="sessionName";
-    public static final String KEY_BAR_NAME="barName";
-    public static final String KEY_BAR_ADDRESS="barAddress";
     public static final String KEY_START_DATE="startDate";
     public static final String KEY_END_DATE="endDate";
+    public static final String KEY_JOINED_USERS="joinedUsers";
 
 
     public Session(){}
 
     public Session (
-            String id,String barId,String sessionName,String barName,String barAddress,String startDate,String endDate){
+            String id,String barId,String sessionName,String startDate,String endDate){
 
         this.id=id;
         this.barId=barId;
         this.sessionName=sessionName;
-        this.barName=barName;
-        this.barAddress=barAddress;
         this.startDate=startDate;
         this.endDate=endDate;
     }
@@ -54,13 +50,7 @@ public class Session extends BaseModel{
         this.sessionName = sessionName;
     }
 
-    public String getBarName() {
-        return barName;
-    }
 
-    public void setBarName(String barName) {
-        this.barName = barName;
-    }
 
     public String getStartDate() {
         return startDate;
@@ -78,14 +68,6 @@ public class Session extends BaseModel{
         this.endDate = finalDate;
     }
 
-    public String getBarAddress() {
-        return barAddress;
-    }
-
-    public void setBarAddress(String barAddress) {
-        this.barAddress = barAddress;
-    }
-
     public String getBarId() {
         return barId;
     }
@@ -93,6 +75,7 @@ public class Session extends BaseModel{
     public void setBarId(String barId) {
         this.barId = barId;
     }
+
 
     public Session (JSONObject jsonObject){
 
@@ -106,12 +89,7 @@ public class Session extends BaseModel{
             if(jsonObject.has(KEY_SESSION_NAME)) {
                 this.sessionName = jsonObject.getString(KEY_SESSION_NAME);
             }
-            if(jsonObject.has(KEY_BAR_NAME)) {
-                this.barName = jsonObject.getString(KEY_BAR_NAME);
-            }
-            if(jsonObject.has(KEY_BAR_ADDRESS)) {
-                this.barAddress = jsonObject.getString(KEY_BAR_ADDRESS);
-            }
+
             if(jsonObject.has(KEY_START_DATE)) {
                 this.startDate = jsonObject.getString(KEY_START_DATE);
             }
@@ -140,12 +118,7 @@ public class Session extends BaseModel{
             if(sessionName!=null){
                 jsonObject.put(KEY_SESSION_NAME,sessionName);
             }
-            if(barName!=null){
-                jsonObject.put(KEY_BAR_NAME,barName);
-            }
-            if(barAddress!=null){
-                jsonObject.put(KEY_BAR_ADDRESS,barAddress);
-            }
+
             if(startDate!=null){
                 jsonObject.put(KEY_START_DATE,startDate);
             }

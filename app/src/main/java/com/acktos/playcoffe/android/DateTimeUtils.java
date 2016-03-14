@@ -60,8 +60,6 @@ public class DateTimeUtils {
 
 	public static String millisecondsToMinutes(String milliseconds){
 
-
-
         Double millis=Double.parseDouble(milliseconds);
         int seconds=(int)(millis/1000)%60;
         int minutes=(int)((millis-seconds)/1000)/60;
@@ -79,6 +77,25 @@ public class DateTimeUtils {
         Date date=new Date(timestamp);
         return sdf.format(date);
 
+    }
+
+	public static int compareTwoDateStrings(String firstDate, String secondDate){
+
+        SimpleDateFormat dbFormat=new SimpleDateFormat(DB_FORMAT,Locale.getDefault());
+
+        try {
+            Date initDate=dbFormat.parse(firstDate);
+            Date endDate=dbFormat.parse(secondDate);
+
+            return initDate.compareTo(endDate);
+
+
+        } catch (ParseException e) {
+            Log.e(BaseController.TAG,"Exception trying compare two dates");
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
 }

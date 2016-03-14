@@ -137,7 +137,11 @@ public class SearchableActivity extends AppCompatActivity
             @Override
             public void onResponse(List<SpotifyTrack> responseTracks) {
 
+                Log.i(BaseController.TAG,"entry onResponse onQueryTextSubmit:"+responseTracks.size());
+
                 if (responseTracks != null) {
+
+                    Log.i(BaseController.TAG,"number of tracks:"+responseTracks.size());
 
                     tracks.clear();
                     tracks.addAll(responseTracks);
@@ -166,6 +170,8 @@ public class SearchableActivity extends AppCompatActivity
                 public void onResponse(List<SpotifyTrack> responseTracks) {
 
                     if (responseTracks != null) {
+
+                        Log.i(BaseController.TAG,"number of tracks on text change:"+responseTracks.size());
 
                         tracks.clear();
                         tracks.addAll(responseTracks);

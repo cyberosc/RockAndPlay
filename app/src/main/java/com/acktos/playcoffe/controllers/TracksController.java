@@ -99,6 +99,8 @@ public class TracksController extends BaseController{
                                 //Log.i(TAG, "spotify track:" + getTrackFromSpotifyObject(jsonObjectItem).toString());
                             }
 
+
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -157,9 +159,7 @@ public class TracksController extends BaseController{
     }
 
     /**
-     * Check number of queue tracks, if it
-     * @param trackId
-     * @param addTrackListener
+     * Check number of queue tracks.
      */
     public void addTrackToQueue(final QueueTrack queueTrack,final OnAddTrackListener addTrackListener){
 
@@ -210,8 +210,6 @@ public class TracksController extends BaseController{
                     success =false;
                     message =context.getString(R.string.msg_max_number_tracks_reached);
                 }
-
-
 
             }
 
