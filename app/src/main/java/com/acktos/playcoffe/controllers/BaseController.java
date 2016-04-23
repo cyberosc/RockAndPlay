@@ -16,6 +16,7 @@ public class BaseController {
     public static final String SHARED_PREFERENCES="com.acktos.playcoffe.sharedpreferences";
     public static final String FILE_USER_PROFILE="com.acktos.playcoffe.USER_PROFILE";
     public static final String FILE_JOINED_SESSION="com.acktos.roackandplay.JOINED_SESSION";
+    public static final String FILE_BAR_PLAY_LIST="com.acktos.roackandplay.BAR_PLAY_LIST";
 
 
     //FireBase Credentials
@@ -27,6 +28,7 @@ public class BaseController {
     public static final String TABLE_CARDS="cards";
     public static final String TABLE_BARS="bars";
     public static final String TABLE_PLAYER_STATE="playerState";
+    public static final String TABLE_PLAYLIST="playlist";
 
     // Api endpoints
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.acktos.playcoffe.R;
 import com.acktos.playcoffe.android.DateTimeUtils;
 import com.acktos.playcoffe.models.SpotifyTrack;
+import com.acktos.playcoffe.models.Track;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
     private Context context;
-    private List<SpotifyTrack> tracks;
+    private List<Track> tracks;
     private static OnRecyclerViewClickListener onRecyclerViewClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -51,7 +52,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
     }
 
-    public SearchAdapter(Context context, List<SpotifyTrack> tracks, OnRecyclerViewClickListener onRecyclerViewClick){
+    public SearchAdapter(Context context, List<Track> tracks, OnRecyclerViewClickListener onRecyclerViewClick){
 
         this.context=context;
         this.tracks=tracks;
@@ -75,12 +76,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
-        viewHolder.txtTrackName.setText(tracks.get(i).getName());
+        viewHolder.txtTrackName.setText(tracks.get(i).getSong());
         viewHolder.txtArtist.setText(tracks.get(i).getArtist());
         viewHolder.txtDuration.setText(
                 DateTimeUtils.millisecondsToMinutes(tracks.get(i).getDuration()));
         Picasso.with(context)
-                .load(tracks.get(i).getThumb())
+                .load("http://www.acktos.com.co/images/thumbnail.png")
                 .placeholder(R.drawable.ic_music_note_black_24dp)
                 .into(viewHolder.thumbAlbum);
     }

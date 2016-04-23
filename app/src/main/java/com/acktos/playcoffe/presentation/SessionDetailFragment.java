@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,10 +20,12 @@ import com.acktos.playcoffe.R;
 import com.acktos.playcoffe.android.DateTimeUtils;
 import com.acktos.playcoffe.controllers.BaseController;
 import com.acktos.playcoffe.controllers.SessionsController;
+import com.acktos.playcoffe.controllers.TracksController;
 import com.acktos.playcoffe.controllers.UsersController;
 import com.acktos.playcoffe.models.Card;
 import com.acktos.playcoffe.models.Credit;
 import com.acktos.playcoffe.models.Session;
+import com.acktos.playcoffe.models.Track;
 import com.acktos.playcoffe.models.User;
 import com.acktos.playcoffe.util.CapturePortraitOrientationActivity;
 import com.afollestad.materialdialogs.DialogAction;
@@ -33,10 +36,15 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -54,6 +62,10 @@ public class SessionDetailFragment extends Fragment implements View.OnClickListe
     //Components
     private UsersController usersController;
     private SessionsController sessionsController;
+    private TracksController tracksController;
+
+    //Android Utils
+    Gson gson;
 
     // UI references
     private Button btnScan;
@@ -88,8 +100,11 @@ public class SessionDetailFragment extends Fragment implements View.OnClickListe
         Firebase.setAndroidContext(getActivity());
 
         //Initialize components
+
         usersController=new UsersController(getActivity());
         user=usersController.getUser();
+        tracksController=new TracksController(getActivity());
+        gson=new Gson();
 
         sessionsController=new SessionsController(getActivity());
 
@@ -383,6 +398,9 @@ public class SessionDetailFragment extends Fragment implements View.OnClickListe
 
                             addUserToSession(sessionKey, session.getSessionName());
 
+                            // Download the play list from the bar.
+                            downloadPlayList(barId);
+
                         }
                     }else{
                         Log.i(BaseController.TAG, "endSession date is empty");
@@ -535,6 +553,63 @@ public class SessionDetailFragment extends Fragment implements View.OnClickListe
     private String getCodeFromScan(String scanResult){
 
         return scanResult.substring(5);
+    }
+
+
+    private void downloadPlayList(String barId){
+
+        if(barId!=null){
+
+            Firebase playListReference=new Firebase(BaseController.FIREBASE_URL+BaseController.TABLE_BARS);
+
+            playListReference.child(barId).child(BaseController.TABLE_PLAYLIST)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                            Log.i(BaseController.TAG, "onDataChange: barPlayList:"+dataSnapshot);
+
+                                List<Track> barTracksList=new ArrayList<>();
+
+                                for (DataSnapshot barTracksSnapshot : dataSnapshot.getChildren()) {
+
+                                    Track track=new Track(
+                                            barTracksSnapshot.getKey(),
+                                            barTracksSnapshot.child(Track.KEY_ARTIST).getValue().toString(),
+                                            barTracksSnapshot.child(Track.KEY_DURATION).getValue().toString(),
+                                            barTracksSnapshot.child(Track.KEY_DURATION_TEXT).getValue().toString(),
+                                            barTracksSnapshot.child(Track.KEY_SONG).getValue().toString());
+
+
+                                    barTracksList.add(track);
+                                    //Log.i(BaseController.TAG, "Saving playlist..." + dataSnapshot.getValue().toString());
+                                    //tracksController.saveBarPlayList(dataSnapshot.getValue().toString());
+                                    //Log.i(BaseController.TAG, "Playlist saved");
+                                }
+
+
+                                String barTracksString=gson.toJson(barTracksList);
+                                Log.i(BaseController.TAG, "Saving playlist..." + barTracksString);
+                                tracksController.saveBarPlayList(barTracksString);
+                                Log.i(BaseController.TAG, "Playlist saved");
+
+                            }
+
+                            @Override
+                            public void onCancelled (FirebaseError firebaseError){
+
+                                Log.i(BaseController.TAG, "(downloadPlayList) an occurred error trying to download the playlist ");
+                            }
+                        }
+
+                        );
+
+
+                    }else{
+
+            Log.i(BaseController.TAG, "(downloadPlayList) the bar ID is NULL");
+        }
     }
 
 

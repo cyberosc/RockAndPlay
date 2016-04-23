@@ -21,8 +21,12 @@ import com.acktos.playcoffe.R;
 import com.acktos.playcoffe.android.DividerItemDecoration;
 import com.acktos.playcoffe.controllers.BaseController;
 import com.acktos.playcoffe.controllers.TracksController;
+import com.acktos.playcoffe.controllers.UsersController;
 import com.acktos.playcoffe.models.QueueTrack;
+import com.acktos.playcoffe.models.SessionTrack;
 import com.acktos.playcoffe.models.SpotifyTrack;
+import com.acktos.playcoffe.models.Track;
+import com.acktos.playcoffe.models.User;
 import com.acktos.playcoffe.presentation.adapters.SearchAdapter;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Response;
@@ -41,7 +45,7 @@ public class SearchableActivity extends AppCompatActivity
 
 
     //UI References
-    private List<SpotifyTrack> tracks;
+    private List<Track> tracks;
     private RecyclerView.Adapter recyclerAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerTracks;
@@ -51,7 +55,11 @@ public class SearchableActivity extends AppCompatActivity
 
     //Components
     TracksController tracksController;
+    UsersController usersController;
     Firebase mFirebaseRef;
+
+    //Attributes
+    User user;
 
 
     @Override
@@ -66,6 +74,10 @@ public class SearchableActivity extends AppCompatActivity
 
         //Initialize components
         tracksController=new TracksController(this);
+        usersController=new UsersController(this);
+
+        user=usersController.getUser();
+
         setupRecyclerView();
         setupFirebase();
 
@@ -133,7 +145,7 @@ public class SearchableActivity extends AppCompatActivity
     public boolean onQueryTextSubmit(String query) {
         Log.i(BaseController.TAG,"search: OnQueryTextSubmit" );
 
-        tracksController.searchSpotifyTracks(query, new Response.Listener<List<SpotifyTrack>>() {
+        /*tracksController.searchSpotifyTracks(query, new Response.Listener<List<SpotifyTrack>>() {
             @Override
             public void onResponse(List<SpotifyTrack> responseTracks) {
 
@@ -155,7 +167,18 @@ public class SearchableActivity extends AppCompatActivity
             public void onErrorResponse(VolleyError volleyError) {
 
             }
-        });
+        });*/
+        List<Track> responseTracks=tracksController.searchTrackFromLocalPlayList(query);
+
+        if(responseTracks.size()>=1){
+            tracks.clear();
+            tracks.addAll(responseTracks);
+            recyclerAdapter.notifyDataSetChanged();
+        }else
+        if(responseTracks.size()<1){
+            tracks.clear();
+            recyclerAdapter.notifyDataSetChanged();
+        }
         return true;
     }
 
@@ -165,7 +188,7 @@ public class SearchableActivity extends AppCompatActivity
         Log.i(BaseController.TAG, "search: OnQueryTextChange:"+ newText);
 
         if(newText.length()>1){
-            tracksController.searchSpotifyTracks(newText, new Response.Listener<List<SpotifyTrack>>() {
+            /*tracksController.searchSpotifyTracks(newText, new Response.Listener<List<SpotifyTrack>>() {
                 @Override
                 public void onResponse(List<SpotifyTrack> responseTracks) {
 
@@ -185,19 +208,32 @@ public class SearchableActivity extends AppCompatActivity
                 public void onErrorResponse(VolleyError volleyError) {
 
                 }
-            });
+            });*/
+
+            List<Track> responseTracks=tracksController.searchTrackFromLocalPlayList(newText);
+
+            if(responseTracks.size()>=1){
+                tracks.clear();
+                tracks.addAll(responseTracks);
+                recyclerAdapter.notifyDataSetChanged();
+            }else
+            if(responseTracks.size()<1){
+                tracks.clear();
+                recyclerAdapter.notifyDataSetChanged();
+            }
         }
 
 
         return true;
     }
 
+
     @Override
     public void onRecyclerViewClick(View v, int position) {
 
         //TODO: get Bar and Session name to show in dialog message
 
-        final SpotifyTrack track=tracks.get(position);
+        final Track track=tracks.get(position);
         if(track!=null){
 
 
@@ -210,11 +246,10 @@ public class SearchableActivity extends AppCompatActivity
                             progressDialogView.setVisibility(View.VISIBLE);
                             thumbAlbumView.setVisibility(View.INVISIBLE);
 
-                            QueueTrack queueTrack=new QueueTrack(
-                                    track.getId(),track.getName(),track.getArtist(),track.getDuration(),track.getThumb(),"1","oscar");
+                            SessionTrack sessionTrack=new SessionTrack(track.getId(),user.getId() );
 
 
-                            tracksController.addTrackToQueue(queueTrack, new TracksController.OnAddTrackListener() {
+                            tracksController.addTrackToQueue(sessionTrack, new TracksController.OnAddTrackListener() {
                                 @Override
                                 public void onAddTrack(String message, boolean success) {
 
@@ -244,11 +279,11 @@ public class SearchableActivity extends AppCompatActivity
             thumbAlbumView=(CircleImageView) dialogView.findViewById(R.id.thumb_album_add_track_dialog);
 
             Picasso.with(this)
-                    .load(track.getThumb())
+                    .load("http://www.acktos.com.co/images/thumbnail.png")
                     .placeholder(R.drawable.ic_music_note_black_24dp)
                     .into(thumbAlbumView);
 
-            trackNameView.setText(track.getName());
+            trackNameView.setText(track.getSong());
             messageView.setText(getString(R.string.msg_add_track_dialog));
 
 

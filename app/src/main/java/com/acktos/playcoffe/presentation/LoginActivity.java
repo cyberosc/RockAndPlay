@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity implements
     private static final String REDIRECT_URI = "coffeplay-protocol://callback";
 
     //UI references
-    private Button btnSpotifyLogin;
-    private Button btnGoogleLogin;
+    //private Button btnSpotifyLogin;
+    private SignInButton btnGoogleLogin;
     private TextView txtLoginStatus;
     private ProgressDialog mAuthProgressDialog;
 
@@ -102,13 +102,13 @@ public class LoginActivity extends AppCompatActivity implements
 
 
         //Initialize UI
-        btnSpotifyLogin=(Button) findViewById(R.id.btn_spotify_login);
-        btnGoogleLogin=(Button) findViewById(R.id.btn_google_login);
+        //btnSpotifyLogin=(Button) findViewById(R.id.btn_spotify_login);
+        btnGoogleLogin=(SignInButton) findViewById(R.id.btn_sing_in_google);
         txtLoginStatus=(TextView) findViewById(R.id.txt_login_status);
         setupAuthProgressDialog();
 
         //Set clicks listener to UI
-        btnSpotifyLogin.setOnClickListener(this);
+        //btnSpotifyLogin.setOnClickListener(this);
         btnGoogleLogin.setOnClickListener(this);
 
         //Initialize components
@@ -210,12 +210,12 @@ public class LoginActivity extends AppCompatActivity implements
 
         switch (v.getId()){
 
-            case R.id.btn_spotify_login:
+           /* case R.id.btn_spotify_login:
                 setLoginStatus(getString(R.string.connecting));
                 AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
-                break;
+                break;*/
 
-            case R.id.btn_google_login :
+            case R.id.btn_sing_in_google :
                 onSignInClicked();
                 break;
 

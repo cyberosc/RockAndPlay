@@ -4,6 +4,7 @@ package com.acktos.playcoffe.models;
  * Created by Acktos on 9/30/15.
  */
 
+@Deprecated
 public class QueueTrack {
 
     private String id;

@@ -16,6 +16,8 @@ import java.util.List;
 /**
  * Created by Acktos on 9/1/15.
  */
+
+@Deprecated
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ViewHolder> {
 
     private List<Session> sessions;

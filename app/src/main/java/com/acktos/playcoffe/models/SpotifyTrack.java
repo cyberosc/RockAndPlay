@@ -6,6 +6,8 @@ import org.json.JSONObject;
 /**
  * Created by Acktos on 9/3/15.
  */
+
+@Deprecated
 public class SpotifyTrack extends BaseModel{
 
     private String id;

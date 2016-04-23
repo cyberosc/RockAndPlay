@@ -25,7 +25,9 @@ import com.acktos.playcoffe.controllers.TracksController;
 import com.acktos.playcoffe.models.Player;
 import com.acktos.playcoffe.models.QueueTrack;
 import com.acktos.playcoffe.models.Session;
+import com.acktos.playcoffe.models.SessionTrack;
 import com.acktos.playcoffe.models.SpotifyTrack;
+import com.acktos.playcoffe.models.Track;
 import com.acktos.playcoffe.presentation.adapters.PlaylistAdapter;
 import com.acktos.playcoffe.presentation.adapters.SearchAdapter;
 import com.firebase.client.DataSnapshot;
@@ -56,7 +58,9 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
     RecyclerView recyclerTracks;
     View contentEmptyQueue;
 
-    private List<QueueTrack> playlistTracks;
+
+
+
     private RecyclerView.Adapter recyclerAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -68,6 +72,16 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
     //Attributes
     Session session;
     String playerState;
+    /**
+     * session tracks from firebase
+     */
+    private List<SessionTrack> sessionTracksList;
+
+
+    /**
+     * playList built from session tracks and bar tracks;
+     */
+    private List<Track> playList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -111,9 +125,11 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
 
         //Get current joined session
         session=sessionsController.getJoinedSession();
+        tracksController=new TracksController(getActivity());
 
         //Initialize attributes
-        playlistTracks=new ArrayList<>();
+        sessionTracksList=new ArrayList<>();
+        playList=new ArrayList<>();
 
         //SetupComponents
         setupRecyclerView();
@@ -133,13 +149,14 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerTracks.setLayoutManager(layoutManager);
 
-        recyclerAdapter = new PlaylistAdapter(getActivity(),playlistTracks,this);
+        recyclerAdapter = new PlaylistAdapter(getActivity(),playList,this);
         recyclerTracks.setAdapter(recyclerAdapter);
     }
 
     private void getPlaylistQueueFromFirebase(){
 
-        Firebase playlistRef = new Firebase(
+
+        final Firebase playlistRef = new Firebase(
                 BaseController.FIREBASE_URL+BaseController.TABLE_SESSIONS+"/"+session.getId()+"/"+BaseController.TABLE_TRACKS);
 
         playlistRef.addValueEventListener(new ValueEventListener() {
@@ -147,35 +164,26 @@ public class PlayListFragment extends Fragment implements PlaylistAdapter.OnRecy
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i(BaseController.TAG,"playlist queue:"+dataSnapshot.getValue().toString());
 
-                List<QueueTrack> playlistTracksFirebase = new ArrayList<>();
+                List<SessionTrack> sessionTracksFirebase = new ArrayList<>();
+                List<Track> barPlayList=new ArrayList<>();
 
                 for (DataSnapshot playlistSnapshot : dataSnapshot.getChildren()) {
 
 
-                    //QueueTrack queueTrack = playlistSnapshot.getValue(QueueTrack.class);
-                    QueueTrack queueTrack = new QueueTrack(
-                            playlistSnapshot.getKey(),
-                            playlistSnapshot.child(QueueTrack.KEY_TRACK_ID).getValue().toString(),
-                            playlistSnapshot.child(QueueTrack.KEY_STATE).getValue().toString(),
-                            playlistSnapshot.child(QueueTrack.KEY_ORDER).getValue().toString(),
-                            playlistSnapshot.child(QueueTrack.KEY_TRACK_NAME).getValue().toString(),
-                            playlistSnapshot.child(QueueTrack.KEY_ARTIST_NAME).getValue().toString(),
-                            playlistSnapshot.child(QueueTrack.KEY_DURATION).getValue().toString(),
-                            playlistSnapshot.child(QueueTrack.KEY_THUMB_ALBUM).getValue().toString(),
-                            playlistSnapshot.child(QueueTrack.KEY_USER_ID).getValue().toString(),
-                            playlistSnapshot.child(QueueTrack.KEY_USERNAME).getValue().toString());
+                    SessionTrack sessionTrack=playlistSnapshot.getValue(SessionTrack.class);
+                    sessionTracksFirebase.add(sessionTrack);
 
-
-                    playlistTracksFirebase.add(queueTrack);
-                    //System.out.println(session.getBarName() + " - " + session.getSessionName());
                 }
 
-                if (playlistTracksFirebase != null) {
-                    playlistTracks.clear();
-                    playlistTracks.addAll(playlistTracksFirebase);
+
+                barPlayList=tracksController.getBarTracksFromSessionTracks(sessionTracksFirebase);
+
+                if (barPlayList != null) {
+                    playList.clear();
+                    playList.addAll(barPlayList);
                     recyclerAdapter.notifyDataSetChanged();
 
-                    if(playlistTracks.size()>=1){
+                    if(barPlayList.size()>=1){
                         recyclerTracks.setVisibility(View.VISIBLE);
                         contentEmptyQueue.setVisibility(View.INVISIBLE);
                     }else{

@@ -11,6 +11,7 @@ import com.acktos.playcoffe.R;
 import com.acktos.playcoffe.android.DateTimeUtils;
 import com.acktos.playcoffe.models.QueueTrack;
 import com.acktos.playcoffe.models.SpotifyTrack;
+import com.acktos.playcoffe.models.Track;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHolder> {
 
     private Context context;
-    private List<QueueTrack> tracks;
+    private List<Track> tracks;
     private static OnRecyclerViewClickListener onRecyclerViewClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -31,6 +32,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         public TextView txtTrackName;
         public TextView txtArtist;
         public TextView txtDuration;
+        public TextView txtOrder;
         //public CircleImageView thumbAlbum;
 
 
@@ -40,6 +42,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
             txtTrackName=(TextView)itemView.findViewById(R.id.txt_track_name_playlist);
             txtArtist=(TextView)itemView.findViewById(R.id.txt_artist_playlist);
             txtDuration=(TextView)itemView.findViewById(R.id.txt_duration_playlist);
+            txtOrder=(TextView)itemView.findViewById(R.id.lbl_order_track);
             //thumbAlbum=(CircleImageView)itemView.findViewById(R.id.thumb_album);
 
             itemView.setOnClickListener(this);
@@ -52,7 +55,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         }
     }
 
-    public PlaylistAdapter(Context context, List<QueueTrack> tracks, OnRecyclerViewClickListener onRecyclerViewClick){
+    public PlaylistAdapter(Context context, List<Track> tracks, OnRecyclerViewClickListener onRecyclerViewClick){
 
         this.context=context;
         this.tracks=tracks;
@@ -76,9 +79,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
-        viewHolder.txtTrackName.setText(tracks.get(i).getTrackName());
-        viewHolder.txtArtist.setText(tracks.get(i).getArtistName());
+        viewHolder.txtTrackName.setText(tracks.get(i).getSong());
+        viewHolder.txtArtist.setText(tracks.get(i).getArtist());
         viewHolder.txtDuration.setText(DateTimeUtils.millisecondsToMinutes(tracks.get(i).getDuration()));
+        viewHolder.txtOrder.setText(String.valueOf(i+1));
         /*Picasso.with(context)
                 .load(tracks.get(i).getThumb())
                 .placeholder(R.drawable.ic_music_note_black_24dp)

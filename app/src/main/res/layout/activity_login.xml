@@ -11,23 +11,24 @@
 
     <ImageView
         android:id="@+id/logo_rockandplay"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logorockandplay"
-        android:scaleType="center"/>
+        android:src="@drawable/sonora_logo"
+        android:scaleType="centerInside"/>
 
     <TextView
         android:id="@+id/lbl_rockandplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:text="Rock &amp; Play"
+        android:text="Sonora"
         android:layout_centerHorizontal="true"
         android:textSize="27sp"
         android:textStyle="bold"
         android:layout_marginBottom="5dp"
+        android:layout_marginTop="16dp"
         android:layout_below="@+id/logo_rockandplay" />
 
 
@@ -37,16 +38,20 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/primary_light"
-        android:layout_below="@+id/lbl_rockandplay"
+        android:layout_marginBottom="16dp"
+        android:visibility="invisible"
+        android:text="Hubo un error en tu registro"
+        android:layout_above="@+id/btn_sing_in_google"
         android:layout_centerHorizontal="true" />
 
     <View
+        android:id="@+id/separator"
         android:layout_width="200dp"
         android:layout_height="1dp"
         android:background="#33E1BEE7"
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/lbl_login_intro"/>
+        android:layout_below="@+id/lbl_rockandplay"/>
 
     <TextView
         android:id="@+id/lbl_login_intro"
@@ -55,13 +60,13 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="13sp"
         android:textColor="@color/primary_light"
-        android:layout_above="@+id/btn_google_login"
+        android:layout_below="@+id/separator"
         android:layout_marginBottom="24dp"
-        android:text="Inicia sessión con Google o Spotify"
+        android:text="Inicia sessión con Google"
         android:layout_centerHorizontal="true"
         android:visibility="visible"/>
 
-    <Button
+    <!--<Button
         android:id="@+id/btn_spotify_login"
         android:layout_width="220dp"
         android:layout_height="37dp"
@@ -69,11 +74,11 @@
         android:text="Login con Spotify"
         android:background="@color/green_spotify"
         android:textColor="@color/icons"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
 
-    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />-->
+
+    <!--<Button
         android:id="@+id/btn_google_login"
         android:layout_width="220dp"
         android:layout_height="37dp"
@@ -83,6 +88,14 @@
         android:textColor="@color/icons"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/btn_spotify_login"
+        android:layout_marginBottom="16dp"/>-->
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_sing_in_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"/>
 
 </RelativeLayout>
